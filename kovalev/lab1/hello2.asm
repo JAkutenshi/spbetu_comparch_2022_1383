@@ -1,10 +1,17 @@
+; HELLO2 - Учебная программа N2  лаб.раб.#1 по дисциплине "Архитектура компьютера"
+;          Программа использует процедуру для печати строки
+;
+;      ТЕКСТ  ПРОГРАММЫ
+
 EOFLine  EQU  '$'         ; Определение символьной константы
                           ;     "Конец строки"
 
 ; Стек  программы
 
+ASSUME CS:CODE, SS:AStack
+
 AStack    SEGMENT  STACK
-          DW 12 DUP(?)    ; Отводится 12 слов памяти
+          DW 12 DUP('!')    ; Отводится 12 слов памяти
 AStack    ENDS
 
 ; Данные программы
@@ -13,15 +20,13 @@ DATA      SEGMENT
 
 ;  Директивы описания данных
 
-HELLO     DB 'Здравствуйте!', 0AH, 0DH,EOFLine
-GREETING  DB 'Вас приветствует ст.гр.0381 - Ковалёв П. А.$'
+HELLO     DB 'Hello Worlds!', 0AH, 0DH,EOFLine
+GREETING  DB 'Student from 1383 - Kovalev P. A.$'
 DATA      ENDS
 
 ; Код программы
 
 CODE      SEGMENT
-          ASSUME CS:CODE, DS:DATA, SS:AStack
-
 ; Процедура печати строки
 WriteMsg  PROC  NEAR
           mov   AH,9
