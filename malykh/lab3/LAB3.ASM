@@ -19,8 +19,8 @@ Main PROC FAR
 	push ds
 	AND ax, 0
 	push ax
-    mov ax, DATA
-    mov ds, ax
+    	mov ax, DATA
+    	mov ds, ax
 
 	; Calculate i1
 	mov ax, a
