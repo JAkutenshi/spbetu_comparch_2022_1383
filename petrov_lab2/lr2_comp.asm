@@ -56,7 +56,7 @@ Main      PROC  FAR
 ;  Адресация с базированием и индексированием          
     mov  bx,3           
     mov  al,matr[bx][di]           
-    ;mov  cx,matr[bx][di] 
+    mov  cx,matr[bx][di] 
     ;mov  ax,matr[bx*4][di] 
  
 ;  ПРОВЕРКА РЕЖИМОВ АДРЕСАЦИИ С УЧЕТОМ СЕГМЕНТОВ 
