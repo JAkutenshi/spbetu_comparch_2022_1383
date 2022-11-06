@@ -16,13 +16,12 @@
    mov  ds, ax                           ; сегмента данных
    
 mov ax, a
-cmp ax, b	;сравниваем равны ли a и b.
-jle second 	;выполняет короткий переход, если первый операнд > второго операнда
-
-first:          ;if(a>b)
 mov cx, i 	;i
 shl cx, 1	;2i
 add cx, i	;3i
+cmp ax, b	;сравниваем равны ли a и b.
+jle second 	;выполняет короткий переход, если первый операнд > второго операнда
+first:          ;if(a>b)
 shl cx, 1	;6i
 sub cx, 4	;6i-4
 neg cx
@@ -35,9 +34,6 @@ neg ax          ;20-4i
 jmp result
 
 second:	        ;if(a<=b)
-mov cx, i	;i
-add cx, i	;2i
-add cx, i	;3i
 add cx, 6	;3i+6
 
 mov ax, cx	;3i+6
@@ -49,11 +45,10 @@ result:
 	mov [i1], cx
 	mov [i2], ax
 
-	mov bx, k
-	cmp bx, 0
 getabs_i1:
 	neg cx
 	js getabs_i1
+	cmp k, 0
 jge final2	;короткий переход, если первый операнд >= второго операнда
 final1:
 	getabs_i2:
