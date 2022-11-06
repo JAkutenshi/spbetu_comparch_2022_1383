@@ -18,14 +18,15 @@ Data ENDS
 Code SEGMENT
 
 f1_f2 PROC NEAR
-    mov ax, a
-    cmp ax, b
+    mov ax, i ; i
+    sal ax, 1 ; 2*i
+    mov bx, a
+    cmp bx, b
+
     jg greater
 
 less_or_equal:
 
-    mov ax, i ; i
-    sal ax, 1 ; i*2
     add ax, i ; i*3
     add ax, 4 ; i*3 + 4 / 3*(i - 1) + 7
     mov i1, ax ; i1 = i*3 + 4
@@ -36,8 +37,6 @@ less_or_equal:
 
 greater:
 
-    mov ax, i ; i
-    sal ax, 1 ; 2*i
     mov bx, ax
     sub ax, 15 ; 2*i - 15
     neg ax ; 15 - 2*i
@@ -56,21 +55,22 @@ f1_f2 ENDP
 
 
 f3 PROC NEAR
-    mov ax, k
-    cmp ax, 0
-    jl k_less_zero
-
-k_not_less_zero:
 
     mov ax, i1 ; i1
     cmp ax, 0 ; i1 >= 0 ?
-    jge i1_not_below_zero_k_upper
+    jge i1_not_below_zero
 
-i1_below_zero_k_upper:
+i1_below_zero:
 
     neg ax ; -(i1)
 
-i1_not_below_zero_k_upper:
+i1_not_below_zero:
+
+    mov bx, k
+    cmp bx, 0
+    jl k_less_zero
+
+k_not_less_zero:
 
     cmp ax, 6 ; |i1| >= 6 ?
     jg abs_i1_more_six
@@ -85,16 +85,6 @@ abs_i1_more_six:
     jmp f3_end
 
 k_less_zero:
-
-    mov ax, i1 ; i1
-    cmp ax, 0 ; i1 >= 0 ?
-    jge i1_not_below_zero_k_lower
-
-i1_below_zero_k_lower:
-
-    neg ax ; -(i1)
-
-i1_not_below_zero_k_lower:
 
     mov bx, i2 ; i2
     cmp bx, 0 ; i1 >= 0 ?
