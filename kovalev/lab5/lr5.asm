@@ -1,6 +1,6 @@
-intNum EQU 1Ch
+intNum EQU 08h
 BEEP_TONE EQU 20
-BEEP_DURATION EQU 600
+BEEP_DURATION EQU 500
 
 ASTACK SEGMENT STACK
   DB 2048 DUP(?)
@@ -48,6 +48,9 @@ MAIN ENDP
 SUBR_INT PROC FAR
     push ax
     push cx
+
+    mov al, 20h
+    out 20h, al
 
     dec WORD PTR [check]
 
