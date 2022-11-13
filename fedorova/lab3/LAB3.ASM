@@ -6,8 +6,8 @@ DW 12 DUP(?)
 AStack ENDS
 DATA SEGMENT
 a DW 2
-b DW 1
-i DW -1
+b DW 2
+i DW -3
 k DW 0
 i1 DW ?
 i2 DW ?
@@ -44,11 +44,6 @@ f1:
 f1_a:
     mov i1, 15
     sub i1, ax
-    ;push i1
-    mov ax, i
-    add ax, i
-    ;add ax, i
-    ;add ax,i
     shl ax, 1
     add ax, 3
     mov dx,ax
@@ -59,20 +54,8 @@ f1_a:
     jmp f3
 f1_b:
     add ax, i
-    ;add ax, i
-    ;add ax, i
-    add ax, 4
-    mov i1, ax
-    ;push i1
-    ;jmp f2_b
-    ;mov ax, i
-    ;add ax, i
-    ;add ax, i
-    ;add ax, i
-    ;add ax, i
-    ;add ax, i
-    ;shl ax, 1
-    ;add ax, i
+    add i1, 4
+    add i1, ax
     shl ax, 1
     sub ax, 10
     mov i2, ax
