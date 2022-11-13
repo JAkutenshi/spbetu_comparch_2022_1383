@@ -45,16 +45,6 @@ f1_a:
     mov i1, 15
     sub i1, ax
     ;push i1
-    jmp f2_a
-f1_b:
-    add ax, i
-    ;add ax, i
-    ;add ax, i
-    add ax, 4
-    mov i1, ax
-    ;push i1
-    ;jmp f2_b
-f2_a:
     mov ax, i
     add ax, i
     ;add ax, i
@@ -67,7 +57,14 @@ f2_a:
     mov i2, ax
     ;push i2
     jmp f3
-f2_b:
+f1_b:
+    add ax, i
+    ;add ax, i
+    ;add ax, i
+    add ax, 4
+    mov i1, ax
+    ;push i1
+    ;jmp f2_b
     ;mov ax, i
     ;add ax, i
     ;add ax, i
@@ -79,7 +76,7 @@ f2_b:
     shl ax, 1
     sub ax, 10
     mov i2, ax
-    ;push i2
+
 f3:
     mov ax,i2
     mov dx,i1
