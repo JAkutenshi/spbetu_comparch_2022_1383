@@ -27,54 +27,41 @@ Main      PROC  FAR
     mov   AX,DATA 
     mov   DS,AX 
  
-i_1_0:
-    mov cx, a
-    mov dx, b
-    cmp dx, cx
-    jge i_1_2; if(b>=a)
-
-i_1_1:
+i_0:
     mov ax, i
     shl ax, 1; 2i
+    mov bx, ax; 2i
+    mov cx, a
+    cmp dx, b
+    jge i_2; if(b>=a)
+
+i_1:
     shl ax, 1; 4i
     neg ax; -4i
     add ax, 7; -4i+7
-    mov i1, ax
-    jmp i_2_0
+    mov i1, ax; i1=-4i+7
 
-i_1_2:
-    mov ax, i
-    shl ax, 1; 2i
+    sub bx, 2; 2i-2
+    mov i2, bx; i2=2i-2
+    jmp res_0
+
+i_2:
+    //mov ax, i
+    //shl ax, 1; 2i
     add ax, i; 3i
     shl ax, 1; 6i
     neg ax; -6i
     add ax, 8
-    mov i1, ax; -6i+8
+    mov i1, ax; -6i+8; i1=-6i+8
 
-i_2_0:
-    cmp dx, cx
-    jge i_2_2; if(b>=a)
-    
-i_2_1:
-    mov ax, i
-    shl ax, 1; 2i
-    sub ax, 2; 2i-2
-    jmp i_2_end
-
-i_2_2:
-    mov ax, i
-    shl ax, 1; 2i
-    add ax, i; 3i
-    neg ax; -3i
-    add ax, 2; 2-3i
-
-i_2_end:
-    mov i2, ax
+    add bx, i; 3i
+    neg bx; -3i
+    add bx, 2; 2-3i
+    mov i2, bx; i2=2-3i
 
 res_0:
     mov cx, k
-    mov dx, 0
-    cmp cx, dx
+    cmp cx, 0
     jge res_2; if(k>=0)
 
 res_1:
@@ -92,29 +79,28 @@ res_1_1:
     jge res_1_end; if(|i1-i2|>=2)
 
     mov res, ax;|i1-i2|
-    push ax
+    ;push ax
     jmp en
 
 res_1_end:
     mov res, 2
-    push [res]
+    ;push [res]
     jmp en
 
 res_2:
     mov ax, i2
     neg ax; -i2
-    mov bx, -6
-    cmp ax, bx
+    cmp ax, -6
     jle res_2_2; if(-i2<=-6)
 
 res_2_1:
     mov res, ax
-    push ax
+    ;push ax
     jmp en
 
 res_2_2:
     mov res, bx
-    push bx
+    ;push bx
     jmp en
     
 en:
