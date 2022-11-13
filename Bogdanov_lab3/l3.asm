@@ -22,15 +22,16 @@ Main PROC FAR
     mov AX, DATA
     mov DS, AX
 
+    mov dx,i
+    mov i1,dx
+    sal i1,1
     mov ax,a
     cmp ax,b
     jg A_Great_B
 
-    mov dx,i
-    mov i1,dx
-    sal i1,1
-    mov dx,i
+
     add i1,dx
+    add i1,4
 
    
     mov dx,i
@@ -44,13 +45,10 @@ Main PROC FAR
     jmp FINAL
 
     A_Great_B:
-        mov dx,i
-        mov i1,dx
-        sal i1,1
+      
         neg i1
         add i1,15
 
-        mov dx,i
         mov i1,dx
         sal i2,1
         sal i2,1
@@ -60,12 +58,10 @@ Main PROC FAR
     FINAL:
         mov ax,i1
         mov bx,i2
-        cmp ax,bx
+        cmp ax,i2
         jge NOT_SWITCH
 
-        mov cx,ax
-        mov ax,bx
-        mov bx,cx
+       XCHG ax,cx
 
         NOT_SWITCH:
             mov cx,k
