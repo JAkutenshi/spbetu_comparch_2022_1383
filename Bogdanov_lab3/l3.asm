@@ -34,26 +34,22 @@ Main PROC FAR
     add i1,4
 
    
-    mov dx,i
+    mov dx,i1
     mov i2,dx
     sal i2,1
-    sal i2,1
-    add dx,i
-    add dx,i
-    add dx,-10
-    add i2,dx
+    sub i2,18
     jmp FINAL
 
     A_Great_B:
       
+        sal i1,1
         neg i1
         add i1,15
 
-        mov i1,dx
+        mov dx,i1
+        mov i2,dx
         sal i2,1
-        sal i2,1
-        add i2,3
-        neg i2
+        sub i2,33
 
     FINAL:
         mov ax,i1
