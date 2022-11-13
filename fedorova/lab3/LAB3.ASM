@@ -106,8 +106,6 @@ res_sec:
 print:
     push res
     pop dx
-    add dl,10h
-    int 21h
     ret
 Main ENDP
 CODE ENDS
