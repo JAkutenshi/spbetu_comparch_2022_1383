@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 5.10                  11/6/22 15:12:20
+Microsoft (R) Macro Assembler Version 5.10                  11/13/22 14:58:1
                                                              Page     1-1
 
 
@@ -56,7 +56,7 @@
  001E  8A 07			    mov al,[bx]
 				;error    mov mem3,[bx]
 				; Базированная адресация
-Microsoft (R) Macro Assembler Version 5.10                  11/6/22 15:12:20
+Microsoft (R) Macro Assembler Version 5.10                  11/13/22 14:58:1
                                                              Page     1-2
 
 
@@ -65,46 +65,52 @@
 				; Индексная адресация
  0026  BF 0002			    mov di,ind
  0029  8A 85 000E R		    mov al,vec2[di]
-				;error    mov cx,vec2[di]
+ 002D  8B 8D 000E R		    mov cx,vec2[di];запишется 140А (0
+				А - по индексуБ 14 - 20в 16йсс -
+				 следующий)
+LR2_COMP.ASM(49): warning A4031: Operand types must match
 				; Адресация с базирование�
 				� и индексированием
- 002D  BB 0003			    mov bx,3
- 0030  8A 81 0016 R		    mov al,matr[bx][di]
-				;error    mov cx,matr[bx][di]
-				;error    mov ax,matr[bx*4][di]
+ 0031  BB 0003			    mov bx,3
+ 0034  8A 81 0016 R		    mov al,matr[bx][di];al = FD = -3 = matr[5]
+ 0038  8B 89 0016 R		    mov cx,matr[bx][di];cx = FEFD FE = next = m
+				atr[6] = -2
+LR2_COMP.ASM(53): warning A4031: Operand types must match
+				;error    mov ax,matr[bx*4][di] нельзя м
+				асштабировать бх
 				; ПРОВЕРКА РЕЖИМОВ АДРЕСА�
 				�ИИ С УЧЕТОМ СЕГМЕНТОВ
 				; Переопределение сегмент
 				а
 				; ------ вариант 1
- 0034  B8 ---- R		    mov ax, SEG vec2
- 0037  8E C0			    mov es, ax
- 0039  26: 8B 07		    mov ax, es:[bx]
- 003C  B8 0000			    mov ax, 0
-				; ------ вариант 2
+ 003C  B8 ---- R		    mov ax, SEG vec2 ;натало DATA
  003F  8E C0			    mov es, ax
- 0041  1E			    push ds
- 0042  07			    pop es
- 0043  26: 8B 4F FF		    mov cx, es:[bx-1]
- 0047  91			    xchg cx,ax
+ 0041  26: 8B 07		    mov ax, es:[bx]
+ 0044  B8 0000			    mov ax, 0
+				; ------ вариант 2
+ 0047  8E C0			    mov es, ax
+ 0049  1E			    push ds
+ 004A  07			    pop es
+ 004B  26: 8B 4F FF		    mov cx, es:[bx-1]
+ 004F  91			    xchg cx,ax
 				; ------ вариант 3
- 0048  BF 0002			    mov di,ind
- 004B  26: 89 01		    mov es:[bx+di],ax
+ 0050  BF 0002			    mov di,ind
+ 0053  26: 89 01		    mov es:[bx+di],ax
 				; ------ вариант 4
- 004E  8B EC			    mov bp,sp
+ 0056  8B EC			    mov bp,sp
 				;error mov ax,matr[bp+bx]
 				;error mov ax,matr[bp+di+si]
 				; Использование сегмента �
 				�тека
- 0050  FF 36 0000 R		    push mem1
- 0054  FF 36 0002 R		    push mem2
- 0058  8B EC			    mov bp,sp
- 005A  8B 56 02			    mov dx,[bp]+2
- 005D  CA 0002			    ret 2
- 0060				Main ENDP
- 0060				CODE ENDS
-				END Main
-Microsoft (R) Macro Assembler Version 5.10                  11/6/22 15:12:20
+ 0058  FF 36 0000 R		    push mem1
+ 005C  FF 36 0002 R		    push mem2
+ 0060  8B EC			    mov bp,sp
+ 0062  8B 56 02			    mov dx,[bp]+2
+ 0065  CA 0002			    ret 2
+ 0068				Main ENDP
+ 0068				CODE ENDS
+				    END Main
+Microsoft (R) Macro Assembler Version 5.10                  11/13/22 14:58:1
                                                              Symbols-1
 
 
@@ -113,7 +119,7 @@ Segments and Groups:
                 N a m e         	Length	 Align	Combine Class
 
 ASTACK . . . . . . . . . . . . .  	0018	PARA	STACK	
-CODE . . . . . . . . . . . . . .  	0060	PARA	NONE	
+CODE . . . . . . . . . . . . . .  	0068	PARA	NONE	
 DATA . . . . . . . . . . . . . .  	0026	PARA	NONE	
 
 Symbols:            
@@ -124,7 +130,7 @@ EOL  . . . . . . . . . . . . . .  	NUMBER	0024
 
 IND  . . . . . . . . . . . . . .  	NUMBER	0002	
 
-MAIN . . . . . . . . . . . . . .  	F PROC	0000	CODE	Length = 0060
+MAIN . . . . . . . . . . . . . .  	F PROC	0000	CODE	Length = 0068
 MATR . . . . . . . . . . . . . .  	L BYTE	0016	DATA
 MEM1 . . . . . . . . . . . . . .  	L WORD	0000	DATA
 MEM2 . . . . . . . . . . . . . .  	L WORD	0002	DATA
@@ -145,7 +151,7 @@ VEC2 . . . . . . . . . . . . . .  	L BYTE	000E	DATA
      83 Total   Lines
      19 Symbols
 
-  47798 + 459462 Bytes symbol space free
+  47812 + 459448 Bytes symbol space free
 
-      0 Warning Errors
+      2 Warning Errors
       0 Severe  Errors

@@ -46,16 +46,16 @@ Main PROC FAR
 ; Индексная адресация
     mov di,ind
     mov al,vec2[di]
-;error    mov cx,vec2[di]
+    mov cx,vec2[di];запишется 140А (0А - по индексуБ 14 - 20в 16йсс - следующий)
 ; Адресация с базированием и индексированием
     mov bx,3
-    mov al,matr[bx][di]
-;error    mov cx,matr[bx][di]
-;error    mov ax,matr[bx*4][di]
+    mov al,matr[bx][di];al = FD = -3 = matr[5]
+    mov cx,matr[bx][di];cx = FEFD FE = next = matr[6] = -2
+;error    mov ax,matr[bx*4][di] нельзя масштабировать бх
 ; ПРОВЕРКА РЕЖИМОВ АДРЕСАЦИИ С УЧЕТОМ СЕГМЕНТОВ
 ; Переопределение сегмента
 ; ------ вариант 1
-    mov ax, SEG vec2
+    mov ax, SEG vec2 ;натало DATA
     mov es, ax
     mov ax, es:[bx]
     mov ax, 0
@@ -80,4 +80,4 @@ Main PROC FAR
     ret 2
 Main ENDP
 CODE ENDS
-END Main
+    END Main
