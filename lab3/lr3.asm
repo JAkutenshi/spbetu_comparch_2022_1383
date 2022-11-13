@@ -32,7 +32,7 @@ i_0:
     shl ax, 1; 2i
     mov bx, ax; 2i
     mov cx, a
-    cmp dx, b
+    cmp cx, b
     jge i_2; if(b>=a)
 
 i_1:
