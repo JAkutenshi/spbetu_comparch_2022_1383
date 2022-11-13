@@ -46,9 +46,7 @@ f1_a:
     sub i1, ax
     shl ax, 1
     add ax, 3
-    mov dx,ax
-    mov ax, 0
-    sub ax, dx
+    neg ax
     mov i2, ax
     ;push i2
     jmp f3
