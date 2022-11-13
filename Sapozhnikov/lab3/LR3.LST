@@ -1,0 +1,145 @@
+Microsoft (R) Macro Assembler Version 5.10                  11/13/22 17:24:3
+                                                             Page     1-1
+
+
+ =-0003				a EQU -3
+ = 0002				b EQU 2
+ = 0002				i EQU 2
+ = 0000				k EQU 0
+ 0000				AStack SEGMENT STACK
+ 0000  000C[				DW 12 DUP(?)
+	   ????			
+			 ]	
+				
+ 0018				AStack ENDS
+				
+ 0000				DATA SEGMENT
+				
+ 0000  0000				res DW 0
+ 0002				DATA ENDS
+				
+ 0000				CODE SEGMENT
+					ASSUME CS:CODE, DS:DATA, SS:AStack
+				
+ 0000				Main PROC FAR
+ 0000  1E				push ds
+ 0001  2B C0				sub ax, ax
+ 0003  50				push ax
+				
+ 0004  B8 0002				mov ax, i
+ 0007  D1 E0				shl ax, 1
+ 0009  D1 E0				shl ax, 1
+ 000B  8B D8				mov bx, ax
+				
+ 000D  B9 FFFD				mov cx, a
+ 0010  83 F9 02				cmp cx, b
+ 0013  7E 11				jle fless
+				
+ 0015  F7 D8				neg ax
+ 0017  05 0007				add ax, 7
+ 001A  50				push ax ;i1
+				
+ 001B  8B C3				mov ax, bx
+ 001D  F7 D8				neg ax
+ 001F  05 0005				add ax, 5
+ 0022  50				push ax ;i2
+ 0023  EB 1A 90				jmp f3
+ 0026				fless:
+ 0026  8B C3				mov ax, bx
+ 0028  05 0002				add ax, i
+ 002B  05 0002				add ax, i
+ 002E  F7 D8				neg ax
+ 0030  05 0008				add ax, 8
+ 0033  50				push ax
+				
+ 0034  8B C3				mov ax, bx
+ 0036  F7 D8				neg ax
+ 0038  05 0002				add ax, i
+ 003B  05 000A				add ax, 10
+Microsoft (R) Macro Assembler Version 5.10                  11/13/22 17:24:3
+                                                             Page     1-2
+
+
+ 003E  50				push ax
+				
+ 003F				f3:
+ 003F  59				pop cx ;i1
+ 0040  83 C1 00				add cx, 0
+ 0043  83 F9 00				cmp cx, 0
+ 0046  79 02				jns i1abs ; |i1| = |i1|
+ 0048  F7 D9				neg cx
+ 004A				i1abs:
+ 004A  B8 0000				mov ax, k
+ 004D  3D 0000				cmp ax, 0
+ 0050  75 0C				jne f3v2
+ 0052  5B				pop bx
+ 0053  83 F9 06				cmp cx, 6
+ 0056  7C 13				jl finish
+ 0058  B9 0006				mov cx, 6
+ 005B  EB 0E 90				jmp finish
+				
+ 005E				f3v2:
+ 005E  5A				pop dx ;i2
+ 005F  83 C2 00				add dx, 0
+ 0062  83 FA 00				cmp dx, 0
+ 0065  79 02				jns i2abs ;|i2| = |i2|
+ 0067  F7 DA				neg dx
+ 0069				i2abs:
+ 0069  03 CA				add cx, dx
+				
+ 006B				finish:
+ 006B  89 0E 0000 R			mov [res], cx
+ 006F  51				push cx
+ 0070  59				pop cx
+ 0071  CB				ret
+ 0072				Main ENDP
+ 0072				CODE ENDS
+					END Main
+Microsoft (R) Macro Assembler Version 5.10                  11/13/22 17:24:3
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+ASTACK . . . . . . . . . . . . .  	0018	PARA	STACK	
+CODE . . . . . . . . . . . . . .  	0072	PARA	NONE	
+DATA . . . . . . . . . . . . . .  	0002	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+A  . . . . . . . . . . . . . . .  	NUMBER	-0003	
+
+B  . . . . . . . . . . . . . . .  	NUMBER	0002	
+
+F3 . . . . . . . . . . . . . . .  	L NEAR	003F	CODE
+F3V2 . . . . . . . . . . . . . .  	L NEAR	005E	CODE
+FINISH . . . . . . . . . . . . .  	L NEAR	006B	CODE
+FLESS  . . . . . . . . . . . . .  	L NEAR	0026	CODE
+
+I  . . . . . . . . . . . . . . .  	NUMBER	0002	
+I1ABS  . . . . . . . . . . . . .  	L NEAR	004A	CODE
+I2ABS  . . . . . . . . . . . . .  	L NEAR	0069	CODE
+
+K  . . . . . . . . . . . . . . .  	NUMBER	0000	
+
+MAIN . . . . . . . . . . . . . .  	F PROC	0000	CODE	Length = 0072
+
+RES  . . . . . . . . . . . . . .  	L WORD	0000	DATA
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  LR3		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     86 Source  Lines
+     86 Total   Lines
+     20 Symbols
+
+  48018 + 461289 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors
