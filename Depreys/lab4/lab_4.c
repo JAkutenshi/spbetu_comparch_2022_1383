@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <wchar.h>
+#include <locale.h>
 
 int main(){
-    printf ("Группа 1383. Депрейс Александр. Вариант 7. Задание:\n\tИнвертирование введенных во входной строке цифр в восьмеричной СС\n\tи преобразование заглавных русских букв в строчные,\n\tостальные символы входной строки передаются в выходную строку непосредственно.\n");
+    printf ("Р“СЂСѓРїРїР° 1383. Р”РµРїСЂРµР№СЃ РђР»РµРєСЃР°РЅРґСЂ. Р’Р°СЂРёР°РЅС‚ 7. Р—Р°РґР°РЅРёРµ:\n\tРРЅРІРµСЂС‚РёСЂРѕРІР°РЅРёРµ РІРІРµРґРµРЅРЅС‹С… РІРѕ РІС…РѕРґРЅРѕР№ СЃС‚СЂРѕРєРµ С†РёС„СЂ РІ РІРѕСЃСЊРјРµСЂРёС‡РЅРѕР№ РЎРЎ\n\tРё РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ Р·Р°РіР»Р°РІРЅС‹С… СЂСѓСЃСЃРєРёС… Р±СѓРєРІ РІ СЃС‚СЂРѕС‡РЅС‹Рµ,\n\tРѕСЃС‚Р°Р»СЊРЅС‹Рµ СЃРёРјРІРѕР»С‹ РІС…РѕРґРЅРѕР№ СЃС‚СЂРѕРєРё РїРµСЂРµРґР°СЋС‚СЃСЏ РІ РІС‹С…РѕРґРЅСѓСЋ СЃС‚СЂРѕРєСѓ РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ.\n");
 
     char input[81];
     char output[81];
@@ -14,39 +16,82 @@ int main(){
         "lodsb \n"
         "cmp al, 0\n"
         "je finish \n"
-        "cmp al, 48 \n"
+        "cmp al, '0' \n"
         "jl isnt_num \n"
-        "cmp al, 55 \n"
+        "cmp al, '7' \n"
         "jg isnt_num \n"
 
         "is_num: \n"
-        "mov bl, 103 \n"
+        "mov bl, '0' \n"
+        "add bl, '7' \n"
         "sub bl, al \n"
         "mov al, bl \n"
         "stosb \n"
         "jmp letter_check \n"
 
         "isnt_num: \n"
-        "cmp al, 168 \n"
-        "je weird_rus_letter \n"
-        "cmp al, 192 \n"
-        "jl isnt_rus_up \n"
-        "cmp al, 223 \n"
-        "jg isnt_rus_up \n"
+        "cmp al, 208 \n"
+        "je is_rus_1 \n"
+        "cmp al, 209 \n"
+        "je is_rus_2 \n"
 
-        "is_rus_up: \n"
-        "add al, 32 \n"
+        "isnt_rus_up: \n"
         "stosb \n"
         "jmp letter_check \n"
 
         "weird_rus_letter: \n"
-        "mov al, 184 \n"
+        "mov al, 209 \n"
+        "stosb \n"
+        "mov al, 145 \n"
         "stosb \n"
         "jmp letter_check \n"
 
-        "isnt_rus_up: \n" 
+        "is_rus_1: \n"
+        "lodsb \n"
+        "cmp al, 129 \n"
+        "je weird_rus_letter \n"
+        "cmp al, 144 \n"
+        "jl letter_check \n"
+        "cmp al, 159 \n"
+        "jg second_rus_check \n"
+        
+        "print_rus_1: \n"
+        "mov bl, al \n"
+        "mov al, 208 \n"
         "stosb \n"
-        "jmp letter_check \n"   
+        "mov al, bl \n"
+        "add al, 32 \n"
+        "stosb \n"
+        "jmp letter_check \n"
+
+        "second_rus_check: \n"
+        "cmp al, 175 \n"
+        "jle print_rus_2 \n"
+        "cmp al, 191 \n"
+        "jg letter_check \n"
+
+        "print_rus_3: \n"
+        "mov bl, al \n"
+        "mov al, 208 \n"
+        "stosb \n"
+        "mov al, bl \n"
+        "stosb \n"
+        "jmp letter_check \n"
+
+        "print_rus_2: \n"
+        "mov bl, al \n"
+        "mov al, 209 \n"
+        "stosb \n"
+        "mov al, bl \n"
+        "sub al, 32 \n"
+        "stosb \n"
+        "jmp letter_check \n"
+
+        "is_rus_2: \n"
+        "stosb \n"
+        "lodsb \n"
+        "stosb \n"
+        "jmp letter_check \n"
 
         "finish: \n"
         "stosb \n"
