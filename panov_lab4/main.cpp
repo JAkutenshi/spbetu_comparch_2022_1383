@@ -1,4 +1,4 @@
-
+ï»¿
 #include <iostream>
 #include <fstream>
 #include <cstdio>
@@ -11,7 +11,7 @@ std::string str;
 int main() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
-	std::cout<<"Ïàíîâ Ìèõàèë 1383. \nÂàðèàíò 15: ñêëþ÷åíèå ðóññêèõ áóêâ è öèôð, ââåäåííûõ \nâî âõîäíîé ñòðîêå, ïðè ôîðìèðîâàíèè âûõîäíîé ñòðîêè."<<std::endl;
+	std::cout<<"ÐŸÐ°Ð½Ð¾Ð² ÐœÐ¸Ñ…Ð°Ð¸Ð» 1383. \nÐ’Ð°Ñ€Ð¸Ð°Ð½Ñ‚ 15: ÑÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ Ñ€ÑƒÑÑÐºÐ¸Ñ… Ð±ÑƒÐºÐ² Ð¸ Ñ†Ð¸Ñ„Ñ€, Ð²Ð²ÐµÐ´ÐµÐ½Ð½Ñ‹Ñ… \nÐ²Ð¾ Ð²Ñ…Ð¾Ð´Ð½Ð¾Ð¹ ÑÑ‚Ñ€Ð¾ÐºÐµ, Ð¿Ñ€Ð¸ Ñ„Ð¾Ñ€Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ð¸ Ð²Ñ‹Ñ…Ð¾Ð´Ð½Ð¾Ð¹ ÑÑ‚Ñ€Ð¾ÐºÐ¸."<<std::endl;
 	std::cin.getline(input, 81);
 
 	__asm {
@@ -22,13 +22,13 @@ int main() {
 
 		start :
 		lodsb
-			cmp al, '¨'
+			cmp al, 'Ð'
 			je next
-			cmp, '¸'
+			cmp, 'Ñ‘'
 			je next
-			cmp al, 'À' // < A
+			cmp al, 'Ð' // < A
 			jl save
-			cmp al, 'ÿ'
+			cmp al, 'Ñ'
 			jle next
 			cmp al, '0' // < 0
 			jl save
