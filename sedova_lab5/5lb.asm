@@ -29,6 +29,7 @@ seconds proc near
 seconds ENDP
 
 output proc near
+	push dx
 	aam 
 	add ax,3030h 
 	mov dl,ah 
@@ -37,6 +38,7 @@ output proc near
 	int 21h 
 	mov dl,dh 
 	int 21h
+	pop dx
 	ret
 output endp
 
