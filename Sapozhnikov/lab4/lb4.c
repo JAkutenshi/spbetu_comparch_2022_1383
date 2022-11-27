@@ -5,14 +5,134 @@
 char * translitirate(char * str) {
 	char *res = (char *) calloc(81, sizeof(char));
 	char translit []= {
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0x80, 0x81, 0x91, 0x84, 0x85, 0x94, 0x83, 0x95, 0x88, 0x86, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E,
-		0x8F, 0x8A, 0x90, 0x91, 0x92, 0x9E, 0x82, 0x82, 0x95, 0x93, 0x87, 0, 0, 0, 0, 0,
-		0, 0xA0, 0xA1, 0xE1, 0xA4, 0xA5, 0xE4, 0xA3, 0xE5, 0xA8, 0xA6, 0xAA, 0xAB, 0xAC, 0xAD, 0xAE,
-		0xAF, 0xAA, 0xE0, 0xE1, 0xE2, 0xEE, 0xA2, 0xA2, 0xE5, 0xE3, 0xA7, 0, 0, 0, 0, 0
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0xD0, 0x90, // A->А
+		0xD0, 0x91, // B->Б
+		0xD0, 0xA1, // C->С
+		0xD0, 0x94, // D->Д
+		0xD0, 0x95, // E->Е
+		0xD0, 0xA4, // F->Ф
+		0xD0, 0x93, // G->Г
+		0xD0, 0xA5, // H->Х
+		0xD0, 0x98, // I->И
+		0xD0, 0x96, // J->Ж
+		0xD0, 0x9A, // K->К
+		0xD0, 0x9B, // L->Л
+		0xD0, 0x9C, // M->М
+		0xD0, 0x9D, // N->Н
+		0xD0, 0x9E, // O->О
+		0xD0, 0x9F, // P->П
+		0xD0, 0x9A, // Q->К
+		0xD0, 0xA0, // R->Р
+		0xD0, 0xA1, // S->С
+		0xD0, 0xA2, // T->Т
+		0xD0, 0xAE, // U->Ю
+		0xD0, 0x92, // V->В
+		0xD0, 0x92, // W->В
+		0xD0, 0xA5, // X->Х
+		0xD0, 0xA3, // Y->У
+		0xD0, 0x97, // Z->З
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0xD0, 0xB0, // a->а
+		0xD0, 0xB1, // b->б
+		0xD1, 0x81, // c->с
+		0xD0, 0xB4, // d->д
+		0xD0, 0xB5, // e->е
+		0xD1, 0x84, // f->ф
+		0xD0, 0xB3, // g->г
+		0xD1, 0x85, // h->х
+		0xD0, 0xB8, // i->и
+		0xD0, 0xB6, // j->ж
+		0xD0, 0xBA, // k->к
+		0xD0, 0xBB, // l->л
+		0xD0, 0xBC, // m->м
+		0xD0, 0xBD, // n->н
+		0xD0, 0xBE, // o->о
+		0xD0, 0xBF, // p->п
+		0xD0, 0xBA, // q->к
+		0xD1, 0x80, // r->р
+		0xD1, 0x81, // s->с
+		0xD1, 0x82, // t->т
+		0xD1, 0x8E, // u->ю
+		0xD0, 0xB2, // v->в
+		0xD0, 0xB2, // w->в
+		0xD1, 0x85, // x->х
+		0xD1, 0x83, // y->у
+		0xD0, 0xB7, // z->з
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0,
+		0, 0
 	};
 
 	asm volatile(
@@ -33,13 +153,18 @@ char * translitirate(char * str) {
 		"	mov rdx, rax				\n\t"
 		"	mov rbx, rsi				\n\t"
 		"	mov rsi, rax				\n\t"
-		"	mov rax, [%[tr] + rsi]		\n\t"
+		"	mov rax, [%[tr] + rsi * 2]	\n\t"
 		"	mov rsi, rbx				\n\t"
-		"	cmp al, 0					\n\t"
-		"	jne _write					\n\t"
+		"	cmp ax, 0					\n\t"
+		"	jne _write2					\n\t"
 		"	mov rax, rdx				\n\t"
+		"	jmp _write					\n\t"
 		"_write:						\n\t"
 		"	stosb						\n\t"
+		"	jmp _next					\n\t"
+		"_write2:						\n\t"
+		"	stosw						\n\t"
+		"_next:							\n\t"
 		"	loop _loop					\n\t"
 		:[res] "=m"(res)
 		:[str] "r"(str),
@@ -51,7 +176,7 @@ char * translitirate(char * str) {
 }
 
 int main() {
-	printf("A.Sapozhnikov - 1383");
+	printf("A.Sapozhnikov - 1383\n");
 	printf("Conversion of Latin letters entered in the input string into Russian ones in accordance with the transliteration rules, the remaining characters of the input string are transmitted to the output string directly\n");
 	char *inp = (char *) calloc(81, sizeof(char));
 	fgets(inp, 80, stdin);
