@@ -46,8 +46,8 @@ stun PROC  NEAR
         push ax
 	push cx
 	push dx
-        mov cx,0fh
-        mov dx,4240h 
+	mov cx,0fh
+	mov dx,8480H
 	mov ax,8600h
         int 15h 
 	pop dx
