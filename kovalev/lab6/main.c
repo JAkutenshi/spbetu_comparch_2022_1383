@@ -51,7 +51,7 @@ int main(void) {
   }
   qsort(borders, NInt, sizeof(int), cmp);
 
-  if (borders[0] < Xmin || borders[NInt - 1] > Xmax) {
+  if (borders[0] < Xmin || borders[NInt - 1] >= Xmax + 1) {
     fprintf(stderr,
             "Error: wrong borders, Xmin = %d, borders[0] = %d, Xmax = %d, "
             "borders[NInt] = %d\n",
