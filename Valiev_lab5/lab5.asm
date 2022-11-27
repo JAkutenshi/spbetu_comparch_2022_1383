@@ -88,7 +88,7 @@ Main PROC FAR
     mov dx, old_ip
     mov ax, old_seg
     mov ds, ax
-    mov ax, 251ch
+    mov ax, 2560h
     int 21h
     pop ds
     STI
