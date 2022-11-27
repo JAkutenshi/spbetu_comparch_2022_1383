@@ -5,6 +5,7 @@ AStack    ENDS
 
 ; Данные программы 
     DATA      SEGMENT
+    message db 'The command is entered incorrectly, enter a number from 1 to 9$'
     KEEP_CS dw 0    
     KEEP_IP dw 0
     duration dw 1500; длительность звучания звукового сигнала
@@ -48,7 +49,11 @@ Audio_Stop:
 
     iret                              
 Interruption ENDP
-
+WriteMsg  PROC  NEAR
+          mov   AH,9
+          int   21h  
+          ret
+WriteMsg  ENDP
 
 ; Головная процедура 
 Main      PROC  FAR 
@@ -82,6 +87,74 @@ INPUT_C:
     je   INPUT_CTRL            
     cmp  al, 2eh                    ; 2e - клавиша c
     jne  INPUT_C
+
+INPUT_TIME:
+    mov bl, al
+    in al, 60h
+    cmp al, bl
+    je INPUT_TIME
+    
+    cmp al, 02h
+    je TIME1
+    cmp al, 03h
+    je TIME2
+    cmp al, 04h
+    je TIME3
+    cmp al, 05h
+    je TIME4
+    cmp al, 06h
+    je TIME5
+    cmp al, 07h
+    je TIME6
+    cmp al, 08h
+    je TIME7
+    cmp al, 09h
+    je TIME8
+    cmp al, 0ah
+    je TIME9
+    
+    mov dx, offset message; Вывод ошибки 
+    call WriteMsg;          на экран
+    jmp INPUT_TIME
+
+TIME1:
+    mov duration, 500
+    jmp OTHER
+
+TIME2:
+    mov duration, 1000
+    jmp OTHER
+
+TIME3:
+    mov duration, 1500
+    jmp OTHER
+
+TIME4:
+    mov duration, 2000
+    jmp OTHER
+
+TIME5:
+    mov duration, 2500
+    jmp OTHER
+
+TIME6:
+    mov duration, 3000
+    jmp OTHER
+
+TIME7:
+    mov duration, 3500
+    jmp OTHER
+
+TIME8:
+    mov duration, 4000
+    jmp OTHER
+
+TIME9:
+    mov duration, 5000
+    jmp OTHER
+    
+
+OTHER:
     mov al, 66
     int  23h                      
 
