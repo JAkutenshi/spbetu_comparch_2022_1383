@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 void funcAsm1(int *, int64_t *, int, int, int);
-void funcAsm2(int64_t *, int *, int *, int, int, int);
+void funcAsm2(int64_t *, int *, int *, int, int, int, int);
 
 static int cmp(const void *first, const void *second) {
   int *left = (int *)first;
@@ -37,7 +37,7 @@ int main(void) {
     exit(EXIT_FAILURE);
   }
 
-  if (NInt > 24 || NInt < 0 || NInt >= Xmax - Xmin) {
+  if (NInt > 24 || NInt < 0) {
     fprintf(stderr, "Error: wrong NInt");
     exit(EXIT_FAILURE);
   }
@@ -51,7 +51,7 @@ int main(void) {
   }
   qsort(borders, NInt, sizeof(int), cmp);
 
-  if (borders[0] < Xmin || borders[NInt - 1] >= Xmax + 1) {
+  if (borders[0] < Xmin || borders[NInt - 1] > Xmax + 1) {
     fprintf(stderr,
             "Error: wrong borders, Xmin = %d, borders[0] = %d, Xmax = %d, "
             "borders[NInt] = %d\n",
@@ -65,11 +65,11 @@ int main(void) {
   int *arr = (int *)calloc(NumRanDat, sizeof(int));
   dnk_randomize();
   for (int i = 0; i < NumRanDat; ++i) {
-    arr[i] = Xmin + (int)(dnk_random() * (Xmax - Xmin));
+    arr[i] = Xmin + (int)(dnk_random() * (Xmax - Xmin + 1));
     /* arr[i] = Xmin + (int)(dnk_normal(0.0, 1.0) * (Xmax - Xmin) / 2); */
   }
 
-  size_t tmpLen = Xmax - Xmin;
+  size_t tmpLen = Xmax - Xmin + 1;
   int64_t *tmp = (int64_t *)calloc(tmpLen, sizeof(int64_t));
 
   funcAsm1(arr, tmp, tmpLen, NumRanDat, Xmin);
@@ -83,7 +83,7 @@ int main(void) {
 
   int *result = (int *)calloc(NInt, sizeof(int));
 
-  funcAsm2(tmp, borders, result, tmpLen, NInt, Xmin);
+  funcAsm2(tmp, borders, result, tmpLen, NInt, Xmin, Xmax);
 
   free(tmp);
 

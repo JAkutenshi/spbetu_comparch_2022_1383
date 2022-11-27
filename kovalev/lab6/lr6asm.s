@@ -28,9 +28,12 @@ skip:
 funcAsm2:                       # rdi -- int64* tmp
     push rbp                    # rsi -- int* borders
     mov rbp, rsp                # rdx -- int* results
-    push r10                    # ecx -- int (Xmax - Xmin)
+    push r11                    # ecx -- int (Xmax - Xmin)
     push rbx                    # r8d -- int NInt
                                 # r9d -- int Xmin
+                                # r10d -- int Xmax
+    mov r10, QWORD PTR [rbp + 2 * 8]
+
     push rax
     push rcx
     push rdi
@@ -48,20 +51,29 @@ suffixLoop:
     push rdx
     push rsi
 
+    mov eax, DWORD PTR [rsi]
+    sub eax, r9d
+    mov rax, QWORD PTR [rdi + rax * 8]
+    mov DWORD PTR [rdx], eax
+    add rdx, 4
+
     mov ecx, r8d
-    dec rcx
+    sub rcx, 2
 resultsLoop:
     mov eax, DWORD PTR [rsi]
     sub eax, r9d
     mov rbx, QWORD PTR [rdi + rax * 8]
 
     mov eax, DWORD PTR [rsi + 4]
-    sub eax, r9d
+    cmp eax, r10d
+    jle skip2
     dec eax
-    mov r10, QWORD PTR [rdi + rax * 8]
+skip2:
+    sub eax, r9d
+    mov r11, QWORD PTR [rdi + rax * 8]
 
-    sub r10, rbx
-    mov DWORD PTR [rdx], r10d
+    sub r11, rbx
+    mov DWORD PTR [rdx], r11d
 
     add rdx, 4
     add rsi, 4
@@ -75,7 +87,7 @@ resultsLoop:
     pop rax
 
     pop rbx
-    pop r10
+    pop r11
     mov rsp, rbp
     pop rbp
     ret
