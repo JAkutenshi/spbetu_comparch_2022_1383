@@ -104,6 +104,7 @@ char * translitirate(char * str) {
 		0, 0,
 		0, 0,
 		0, 0,
+		*/
 		0xD0, 0xB0, // a->а
 		0xD0, 0xB1, // b->б
 		0xD1, 0x81, // c->с
@@ -130,6 +131,7 @@ char * translitirate(char * str) {
 		0xD1, 0x85, // x->х
 		0xD1, 0x83, // y->у
 		0xD0, 0xB7, // z->з
+		/*
 		0, 0,
 		0, 0,
 		0, 0,
@@ -163,13 +165,8 @@ char * translitirate(char * str) {
 		"	mov rbx, rsi				\n\t"
 		"	cmp al, 27					\n\t"
 		"	jb _transliterate_u			\n\t"
-		"	sub rax, 32					\n\t"
-		"	jmp _transliterate_l		\n\t"
+		"	sub rax, 6					\n\t"
 		"_transliterate_u:				\n\t"
-		"	mov rsi, rax				\n\t"
-		"	mov rax, [%[tr] + rsi * 2]	\n\t"
-		"	jmp _write2					\n\t"
-		"_transliterate_l:				\n\t"
 		"	mov rsi, rax				\n\t"
 		"	mov rax, [%[tr] + rsi * 2]	\n\t"
 		"	jmp _write2					\n\t"
