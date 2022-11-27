@@ -90,7 +90,7 @@ int main(void) {
   FILE *f = fopen("result.txt", "w");
 
   fprintf(f, "------------------------------------\n");
-  for (int i = 0; i < NInt; ++i) {
+  for (int i = 0; i < NInt - 1; ++i) {
     fprintf(f, " %4d | %10d | %14d \n", i + 1, borders[i], result[i]);
     fprintf(f, "------------------------------------\n");
   }
