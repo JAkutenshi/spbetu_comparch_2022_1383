@@ -8,7 +8,8 @@ AStack    ENDS
     message db 'The command is entered incorrectly, enter a number from 1 to 9$'
     KEEP_CS dw 0    
     KEEP_IP dw 0
-    duration dw 1500; длительность звучания звукового сигнала
+    duration_0 db 250; изначальная длительность звучания звукового сигнала
+    duration dw 0;
     DATA      ENDS 
  
 ; Код программы 
@@ -87,71 +88,30 @@ INPUT_C:
     je   INPUT_CTRL            
     cmp  al, 2eh                    ; 2e - клавиша c
     jne  INPUT_C
+    
+    sub ax, ax
+    int 16h
 
 INPUT_TIME:
-    mov bl, al
-    in al, 60h
-    cmp al, bl
-    je INPUT_TIME
+    sub ax, ax
+    int 16h
+    cmp al, '1'
+    jl ERROR
+    cmp al, '9'
+    jg ERROR
+    sub al, 48
+    mul duration_0
+    mov duration, ax
+    jmp OTHER
+
     
-    cmp al, 02h
-    je TIME1
-    cmp al, 03h
-    je TIME2
-    cmp al, 04h
-    je TIME3
-    cmp al, 05h
-    je TIME4
-    cmp al, 06h
-    je TIME5
-    cmp al, 07h
-    je TIME6
-    cmp al, 08h
-    je TIME7
-    cmp al, 09h
-    je TIME8
-    cmp al, 0ah
-    je TIME9
-    
+
+ERROR:
     mov dx, offset message; Вывод ошибки 
     call WriteMsg;          на экран
     jmp INPUT_TIME
 
-TIME1:
-    mov duration, 500
-    jmp OTHER
 
-TIME2:
-    mov duration, 1000
-    jmp OTHER
-
-TIME3:
-    mov duration, 1500
-    jmp OTHER
-
-TIME4:
-    mov duration, 2000
-    jmp OTHER
-
-TIME5:
-    mov duration, 2500
-    jmp OTHER
-
-TIME6:
-    mov duration, 3000
-    jmp OTHER
-
-TIME7:
-    mov duration, 3500
-    jmp OTHER
-
-TIME8:
-    mov duration, 4000
-    jmp OTHER
-
-TIME9:
-    mov duration, 5000
-    jmp OTHER
     
 
 OTHER:
@@ -175,13 +135,4 @@ OTHER:
 
 Main      ENDP 
 CODE      ENDS 
-          END Main 
-
-
-
-
-
-
-
-
-
+          END Main
