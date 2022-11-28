@@ -14,7 +14,7 @@ int main() {
 	}
 
 	char *res = (char *) calloc(81, sizeof(char));
-
+	int sum = 0;
 	asm volatile(
 		"mov rsi, %[str]				\n\t"//lodsb будет считывать с str
 		"mov rdi, %[res]				\n\t"//stosb для заиси из ах в res
@@ -32,6 +32,9 @@ int main() {
 		"	cmp al, 97					\n\t"
 		"	jb print					\n\t"
 		"	sub ax, 97					\n\t"
+
+		"	add %0, eax 					\n\t"
+
 		"	mov bl, 16					\n\t"
 		"	div bl						\n\t"
 		"	add al, 48					\n\t"
@@ -48,15 +51,15 @@ int main() {
 		"print:							\n\t"
 		"	stosb						\n\t"
 		"	loop for 					\n\t"
-		:[res] "=m"(res)
+
+		:[sum]"=m"(sum), [res] "=m"(res)
 		:[str] "r"(input_str)
-		:"rax", "rbx", "rcx", "rdx", "rdi", "rsi", "memory", "cc"
+		//:"rax", "rbx", "rcx", "rdx", "rdi", "rsi", "memory", "cc"
 	);
 	res[80] = '\0';
-	printf("%s\n", res);
+	printf("%s\n%d\n", res, sum);
 
 	free(input_str);
 	free(res);
 	return 0;
 }
-
