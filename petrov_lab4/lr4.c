@@ -1,500 +1,119 @@
 #include <stdio.h>
+#include <wchar.h>
+#include <locale.h>
 int main(){
+    setlocale(LC_ALL, "");
+    wprintf (L"ĞŸĞµÑ‚Ñ€Ğ¾Ğ² ĞĞ»ĞµĞºÑĞ°Ğ½Ğ´Ñ€\nĞ“Ñ€ÑƒĞ¿Ğ¿Ğ° 1383\nĞ’Ğ°Ñ€Ğ¸Ğ°Ğ½Ñ‚ 16\nĞŸÑ€ĞµĞ¾Ğ±Ñ€Ğ°Ğ·Ğ¾Ğ²Ğ°Ğ½Ğ¸Ğµ Ğ²Ğ²ĞµĞ´ĞµĞ½Ğ½Ñ‹Ñ… Ğ²Ğ¾ Ğ²Ñ…Ğ¾Ğ´Ğ½Ğ¾Ğ¹ ÑÑ‚Ñ€Ğ¾ĞºĞµ Ñ€ÑƒÑÑĞºĞ¸Ñ… Ğ±ÑƒĞºĞ² Ğ² Ğ»Ğ°Ñ‚Ğ¸Ğ½ÑĞºĞ¸Ğµ Ğ² ÑĞ¾Ğ¾Ñ‚Ğ²ĞµÑ‚ÑÑ‚Ğ²Ğ¸Ğµ Ñ Ğ¿Ñ€Ğ°Ğ²Ğ¸Ğ»Ğ°Ğ¼Ğ¸ Ñ‚Ñ€Ğ°Ğ½ÑĞ»Ğ¸Ñ‚ĞµÑ€Ğ°Ñ†Ğ¸Ğ¸, Ğ¾ÑÑ‚Ğ°Ğ»ÑŒĞ½Ñ‹Ğµ ÑĞ¸Ğ¼Ğ²Ğ¾Ğ»Ñ‹ Ğ²Ñ…Ğ¾Ğ´Ğ½Ğ¾Ğ¹ ÑÑ‚Ñ€Ğ¾ĞºĞ¸ Ğ¿ĞµÑ€ĞµĞ´Ğ°ÑÑ‚ÑÑ Ğ² Ğ²Ñ‹Ñ…Ğ¾Ğ´Ğ½ÑƒÑ ÑÑ‚Ñ€Ğ¾ĞºÑƒ Ğ½ĞµĞ¿Ğ¾ÑÑ€ĞµĞ´ÑÑ‚Ğ²ĞµĞ½Ğ½Ğ¾.\n");
     system("chcp 1251 > nul");
-    printf ("Ïåòğîâ Àëåêñàíäğ\nÃğóïïà 1383\nÂàğèàíò 16\nÏğåîáğàçîâàíèå ââåäåííûõ âî âõîäíîé ñòğîêå ğóññêèõ áóêâ â ëàòèíñêèå â ñîîòâåòñòâèå ñ ïğàâèëàìè òğàíñëèòåğàöèè, îñòàëüíûå ñèìâîëû âõîäíîé ñòğîêè ïåğåäàşòñÿ â âûõîäíóş ñòğîêó íåïîñğåäñòâåííî.\n");
     char input[81];
     char output[81];
     fgets(input,81,stdin);
-    asm(
 
+    char translate[65] = 
+        "a\0"//Ğ°
+        "b\0"//Ğ±
+        "v\0"//Ğ²
+        "g\0"//Ğ³
+        "d\0"//Ğ´
+        "e\0"//e
+        "g\0"//Ğ¶
+        "z\0"//Ğ·
+        "i\0"//Ğ¸
+        "j\0"//Ğ¹
+        "k\0"//Ğº
+        "l\0"//Ğ»
+        "m\0"//Ğ¼
+        "n\0"//Ğ½
+        "o\0"//Ğ¾
+        "p\0"//Ğ¿
+        "r\0"//Ñ€
+        "s\0"//Ñ
+        "t\0"//Ñ‚
+        "u\0"//Ñƒ
+        "f\0"//Ñ„
+        "kh"//Ñ…
+        "ts"//Ñ†
+        "ch"//Ñ‡
+        "sh"//Ñˆ
+        "sc"//Ñ‰
+        "\0\0"//ÑŠ
+        "y\0"//Ñ‹
+        "\0\0"//ÑŒ
+        "e\0"//Ñ
+        "iu"//Ñ
+        "ia"//Ñ
+    ;
+
+
+
+    asm(
         "letter_check: \n"
+            "mov eax, 0\n"
+            "mov ebx, 0\n"
             "lodsb \n"
             "cmp al, 0\n"
             "je finish \n"
 
-            "cmp al, 192\n"//ÀÀÀÀÀ
-            "je A_sym \n"
-            "cmp al, 224\n"//àààààà
-            "je a_sym \n"
-
-            "cmp al, 193\n"//ÁÁÁÁÁ
-            "je B_sym \n"
-            "cmp al, 225\n"//ááááá
-            "je b_sym \n"
-
-            "cmp al, 194\n"//ÂÂÂÂÂ
-            "je V_sym \n"
-            "cmp al, 226\n"//âââââ
-            "je v_sym \n"
-
-            "cmp al, 195\n"//ÃÃÃÃÃ
-            "je G_sym \n"
-            "cmp al, 227\n"//ããããã
-            "je g_sym \n"
-
-            "cmp al, 196\n"//ÄÄÄÄÄ
-            "je D_sym \n"
-            "cmp al, 228\n"//äääää
-            "je d_sym \n"
-
-            "cmp al, 197\n"//ÅÅÅÅÅ
-            "je E_sym \n"
-            "cmp al, 229\n"//ååååå
-            "je e_sym \n"
-
-            "cmp al, 198\n"//ÆÆÆÆÆ
-            "je J_sym \n"
-            "cmp al, 230\n"//æææææ
-            "je j_sym \n"
-
-            "cmp al, 199\n"//ÇÇÇÇÇ
-            "je Z_sym \n"
-            "cmp al, 231\n"//ççççç
-            "je z_sym \n"
-
-            "cmp al, 200\n"//ÈÈÈÈÈ
-            "je I_sym \n"
-            "cmp al, 232\n"//èèèèè
-            "je i_sym \n"
-
-            "cmp al, 201\n"//ÉÉÉÉÉ
-            "je I_sym \n"
-            "cmp al, 233\n"//ééééé
-            "je i_sym \n"
-
-            "cmp al, 202\n"//ÊÊÊÊÊ
-            "je K_sym \n"
-            "cmp al, 234\n"//êêêêê
-            "je k_sym \n"
-
-            "cmp al, 203\n"//ËËËËË
-            "je L_sym \n"
-            "cmp al, 235\n"//ëëëëë
-            "je l_sym \n"
-
-            "cmp al, 204\n"//ÌÌÌÌÌ
-            "je M_sym \n"
-            "cmp al, 236\n"//ììììì
-            "je m_sym \n"
-
-            "cmp al, 205\n"//ÍÍÍÍÍ
-            "je N_sym \n"
-            "cmp al, 237\n"//ííííí
-            "je n_sym \n"
-
-            "cmp al, 206\n"//ÎÎÎÎÎ
-            "je O_sym \n"
-            "cmp al, 238\n"//îîîîî
-            "je o_sym \n"
-
-            "cmp al, 207\n"//ÏÏÏÏÏ
-            "je P_sym \n"
-            "cmp al, 239\n"//ïïïïï
-            "je p_sym \n"
-
-            "cmp al, 208\n"//ĞĞĞĞĞ
-            "je R_sym \n"
-            "cmp al, 240\n"//ğğğğğ
-            "je r_sym \n"
-
-            "cmp al, 209\n"//ÑÑÑÑÑ
-            "je S_sym \n"
-            "cmp al, 241\n"//ñññññ
-            "je s_sym \n"
-
-            "cmp al, 210\n"//ÒÒÒÒÒ
-            "je T_sym \n"
-            "cmp al, 242\n"//òòòòò
-            "je t_sym \n"
-
-            "cmp al, 211\n"//ÓÓÓÓÓ
-            "je U_sym \n"
-            "cmp al, 243\n"//óóóóó
-            "je u_sym \n"
-
-            "cmp al, 212\n"//ÔÔÔÔÔ
-            "je F_sym \n"
-            "cmp al, 244\n"//ôôôôô
-            "je f_sym \n"
-
-            "cmp al, 213\n"//ÕÕÕÕÕ
-            "je Kh_sym \n"
-            "cmp al, 245\n"//õõõõõ
-            "je kh_sym \n"
-
-            "cmp al, 214\n"//ÖÖÖÖÖ
-            "je C_sym \n"
-            "cmp al, 246\n"//ööööö
-            "je c_sym \n"
-
-            "cmp al, 215\n"//×××××
-            "je Ch_sym \n"
-            "cmp al, 247\n"//÷÷÷÷÷
-            "je ch_sym \n"
-
-            "cmp al, 216\n"//ØØØØØ
-            "je Sh_sym \n"
-            "cmp al, 248\n"//øøøøø
-            "je sh_sym \n"
-
-            "cmp al, 217\n"//ÙÙÙÙÙ
-            "je Sñ_sym \n"
-            "cmp al, 249\n"//ùùùùù
-            "je sñ_sym \n"
-
-            "cmp al, 218\n"//ÜÜÜÜÜ
-            "je letter_check \n"
-            "cmp al, 250\n"//üüüüü
-            "je letter_check \n"
-
-            "cmp al, 219\n"//ÛÛÛÛÛ
-            "je Y_sym \n"
-            "cmp al, 251\n"//ûûûûû
-            "je y_sym \n"
-
-            "cmp al, 220\n"//ÚÚÚÚÚ
-            "je letter_check \n"
-            "cmp al, 252\n"//úúúúú
-            "je letter_check \n"
-
-            "cmp al, 221\n"//İİİİİ
-            "je E_sym \n"
-            "cmp al, 253\n"//ııııı
-            "je e_sym \n"
-
-            "cmp al, 222\n"//ŞŞŞŞŞ
-            "je Iu_sym \n"
-            "cmp al, 254\n"//şşşşş
-            "je iu_sym \n"
-
-            "cmp al, 223\n"//ßßßßß
-            "je Ia_sym \n"
-            "cmp al, 255\n"//ÿÿÿÿÿ
-            "je ia_sym \n"
-
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "A_sym: \n"//À
-            "mov al, 65 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "a_sym: \n"//a
-            "mov al, 97 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "B_sym: \n"//B
-            "mov al, 66 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "b_sym: \n"//b
-            "mov al, 98 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "C_sym: \n"//C
-            "mov al, 67 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "c_sym: \n"//c
-            "mov al, 99 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "D_sym: \n"//D
-            "mov al, 68 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "d_sym: \n"//d
-            "mov al, 100 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "E_sym: \n"//E
-            "mov al, 69 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "e_sym: \n"//e
-            "mov al, 101 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "F_sym: \n"//F
-            "mov al, 70 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "f_sym: \n"//f
-            "mov al, 102 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "G_sym: \n"//G
-            "mov al, 71 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "g_sym: \n"//g
-            "mov al, 103 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "H_sym: \n"//H
-            "mov al, 72 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "h_sym: \n"//h
-            "mov al, 104 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "I_sym: \n"//I
-            "mov al, 73 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "i_sym: \n"//i
-            "mov al, 105 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "J_sym: \n"//J
-            "mov al, 74 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "j_sym: \n"//j
-            "mov al, 106 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "K_sym: \n"//K
-            "mov al, 75 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "k_sym: \n"//k
-            "mov al, 107 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "L_sym: \n"//L
-            "mov al, 76 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "l_sym: \n"//l
-            "mov al, 108 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "M_sym: \n"//M
-            "mov al, 77 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "m_sym: \n"//m
-            "mov al, 109 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "N_sym: \n"//N
-            "mov al, 78 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "n_sym: \n"//n
-            "mov al, 110 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "O_sym: \n"//O
-            "mov al, 79 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "o_sym: \n"//o
-            "mov al, 111 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "P_sym: \n"//P
-            "mov al, 80 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "p_sym: \n"//p
-            "mov al, 112 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "R_sym: \n"//R
-            "mov al, 82 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "r_sym: \n"//r
-            "mov al, 114 \n"
-            "stosb \n"
-            "jmp letter_check \n"   
-
-        "S_sym: \n"//S
-            "mov al, 83 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "s_sym: \n"//s
-            "mov al, 115 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "T_sym: \n"//T
-            "mov al, 84 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "t_sym: \n"//t
-            "mov al, 116 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "U_sym: \n"//U
-            "mov al, 85 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "u_sym: \n"//u
-            "mov al, 117 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "V_sym: \n"//V
-            "mov al, 86 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "v_sym: \n"//v
-            "mov al, 118 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "Y_sym: \n"//Y
-            "mov al, 89 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "y_sym: \n"//y
-            "mov al, 121 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "Z_sym: \n"//Z
-            "mov al, 90 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "z_sym: \n"//z
-            "mov al, 122 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-         
-        "Kh_sym: \n"//Kh
-            "mov al, 75 \n"
-            "stosb \n"
-            "mov al, 104 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "kh_sym: \n"//kh
-            "mov al, 107 \n"
-            "stosb \n"
-            "mov al, 104 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "Ch_sym: \n"//Ch
-            "mov al, 67 \n"
-            "stosb \n"
-            "mov al, 104 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "ch_sym: \n"//ch
-            "mov al, 99 \n"
-            "stosb \n"
-            "mov al, 104 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "Sh_sym: \n"//Sh
-            "mov al, 83 \n"
-            "stosb \n"
-            "mov al, 104 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "sh_sym: \n"//sh
-            "mov al, 115 \n"
-            "stosb \n"
-            "mov al, 104 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "Sñ_sym: \n"//Sñ
-            "mov al, 83 \n"
-            "stosb \n"
-            "mov al, 99 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "sñ_sym: \n"//sñ
-            "mov al, 115 \n"
-            "stosb \n"
-            "mov al, 99 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "Iu_sym: \n"//Iu
-            "mov al, 73 \n"
-            "stosb \n"
-            "mov al, 117 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "iu_sym: \n"//iu
-            "mov al, 105 \n"
-            "stosb \n"
-            "mov al, 117 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "Ia_sym: \n"//Ia
-            "mov al, 73 \n"
-            "stosb \n"
-            "mov al, 97 \n"
-            "stosb \n"
-            "jmp letter_check \n"
-
-        "ia_sym: \n"//ia
-            "mov al, 105 \n"
-            "stosb \n"
-            "mov al, 97 \n"
-            "stosb \n"
-            "jmp letter_check \n"
+            "cmp al, 223\n"
+            "jg check_down \n"
+            "cmp al, 191\n"
+            "jg check_up \n"
+            "jmp out\n"
+            
+
+        "check_down:\n"
+            "cmp al, 255\n"
+            "jle letter_down\n"
+            "jmp out\n"
+
+        "check_up:\n"
+            "cmp al, 223\n"
+            "jle letter_up\n"
+            "jmp out\n"
+
+
+        "letter_down: \n"
+            "sub al, 224\n"
+            "shl al, 1\n"
+            "mov bl, al\n"
+            "mov eax, [%[translate] + ebx]\n"
+            "cmp al, 0\n"
+            "je letter_check\n"
+            "stosb\n"
+            "mov eax, [%[translate] + ebx + 1]\n"
+            "cmp al, 0\n"
+            "je letter_check\n"
+            "stosb\n"
+            "jmp letter_check\n"
+
+        "letter_up: \n"
+            "sub al, 192\n"
+            "shl al, 1\n"
+            "mov bl, al\n"
+            "mov eax, [%[translate] + ebx]\n"
+            "cmp al, 0\n"
+            "je letter_check\n"
+            "sub al, 32\n"
+            "stosb\n"
+            "mov eax, [%[translate] + ebx + 1]\n"
+            "cmp al, 0\n"
+            "je letter_check\n"
+            "sub al, 32\n"
+            "stosb\n"
+            "jmp letter_check\n"
+
+        "out:\n"
+            "stosb\n"
+            "jmp letter_check\n"
 
         "finish: \n"
             "stosb \n"
+            "mov al, 0\n"
+            "stosb\n"
 
         :
-        : "D"(output), "S"(input)
-        : 
+        : "D"(output), "S"(input), [translate]"r"(translate)
+        :
     );
 
 
