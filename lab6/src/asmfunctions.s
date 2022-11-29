@@ -46,7 +46,7 @@ asmfunc2:
     jne L1 
     mov DWORD PTR [rsi], -1;
     add rsi, 4
-    add r11d, 4
+    add r11d, 1
 L1:
     mov eax, DWORD PTR [rdi + r11*4]
     cmp r11d, r10d 
@@ -63,7 +63,7 @@ L2:
     jmp L2 
 L3:
     add rsi, 4
-    add rdi, 4
+    add r11d, 1
     add DWORD PTR [rsi], ebx 
     inc rdx
     jmp L1 
