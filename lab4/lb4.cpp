@@ -6,41 +6,77 @@
 using namespace std;
  
 char input[85];
+char output[170];
  
 int main()
 {
-	setlocale(LC_ALL, "Russian");
-	system("chcp 1251");
+    setlocale(LC_ALL, "Russian");
+    system("chcp 1251");
+    wprintf(L"Чернякова Александра, гр. 1383\nВариант 24\nИнвертирование введенных во входной строке цифр в шестнадцатиричной СС и преобразование строчных русских букв в заглавные.");
+    cin.getline(input, 80);
+    __asm {
+        mov esi, offset input
+        mov edi, offset output
+        start :
+        lodsb
+            cmp al, '\0'
+            je final
  
-	int ans = 0;
-	cin.getline(input, 80, '\n');
-	char i = 0;
-	_asm
-	{
-		mov esi, offset input
+            from_0_to_5 :
+            cmp al, '0'
+            jl symbols_check
+            cmp al, '5'
+            jg more_5_less_A
+            mov ah, 'F'
+            sub ah, al
+            add ah, 48
+            mov al, ah
+            stosb
+            jmp start
  
-		check :
-		mov dl, 48
-			mov i, dl
-			cmp[esi], '\0'
-			je finish
-			lodsb
-			start :
+            more_5_less_A :
+        cmp al, '9'
+            jg more_than_9
+            mov ah, 'F'
+            sub ah, al
+            add ah, 41
+            mov al,ah
+            stosb
+            jmp start
  
-		cmp al, i
-			je norm
+            more_than_9 :
+        cmp al, 'F'
+            jg symbols_check
+            mov ah, 'F'
+            sub ah, al
+            add ah, 48
+            mov al,ah
+            stosb
+            jmp start
  
-			add i, 2
-			cmp i, 58
-			je check
-			jmp start
-			norm :
-		add ans, 1
-			jmp check
-			finish :
-	}
+            symbols_check :
+        cmp al, 224
+            jl yo_check
+            cmp al, 255
+            jg yo_check
+            sub al, 32
+            stosb
+            jmp start
  
+            yo_check:
+        	cmp al, 184
+            jne other
+            mov al, 168
+            stosb
+            jmp start
  
-	cout << ans;
-	return 0;
+            other :
+        stosb
+            jmp start
+ 
+            final:
+        stosb
+    };
+    cout << output;
+    return 0;
 }
