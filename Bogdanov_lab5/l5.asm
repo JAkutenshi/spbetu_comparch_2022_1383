@@ -54,11 +54,10 @@ CODE SEGMENT
         MOV AL, 1cH ; номер вектора
         INT 21H ; меняем прерывание
         POP DS
-        ;call MY_INT
+        
 	    mov cx, 0020h 
-	    mov ax, 8600h
+	    mov ah, 86h
 	    int 15h
-        ;
         CLI
         PUSH DS
         MOV DX, KEEP_IP
@@ -69,7 +68,8 @@ CODE SEGMENT
         INT 21H ; восстанавливаем старый вектор прерывания
         POP DS
         STI
-
+        MOV AH, 4CH
+    	INT 21H
     Main ENDP
 
 CODE ENDS
