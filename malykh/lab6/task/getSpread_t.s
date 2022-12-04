@@ -18,8 +18,8 @@ findInterval:
 
 writeRes:
     incq [r8][rcx * 4]
-    cmp eax, [r10][rcx]
-    jg recovery
+    cmp eax, [r9][rcx * 4]
+    jle recovery
     mov [r9][rcx * 4], eax
 recovery:
     pop rcx            # восстанавлием счетчик оставшихся элементов в left_borders
