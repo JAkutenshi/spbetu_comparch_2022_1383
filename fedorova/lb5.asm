@@ -33,7 +33,13 @@ SUBR_INT  PROC FAR
           mov cx, STR_LEN
           mov di, offset INPUT  ; получаем смещение на начало сообщения
           add di, 2
-          mov ah, 01h   ; ввод с клавиатуры
+        mov ah, 01h
+
+        int 21h     ; в al код символа ‘5’
+
+        sub  al,30h   ; теперь в al число 5
+        mov cx, 0
+        mov cl, al
       write_loop:
           int 21h
           mov [di], al ; помещаем символ в строку
