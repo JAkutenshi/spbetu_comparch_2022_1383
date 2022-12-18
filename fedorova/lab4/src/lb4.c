@@ -32,16 +32,25 @@ int main() {
 		"	cmp al, 97					\n\t"
 		"	jb print					\n\t"
 		"	sub ax, 97					\n\t"
-
-		"	add %0, eax 					\n\t"
-
 		"	mov bl, 16					\n\t"
 		"	div bl						\n\t"
+		"	mov bl, al 					\n\t"
+
+		"	push rcx 					\n\t"
+		"	mov rcx, 0 					\n\t"
+		"	mov cl, al 					\n\t"
+		"	add %0, ecx 				\n\t"
+		"	pop rcx 					\n\t"
+
 		"	add al, 48					\n\t"
 		"	stosb						\n\t"
 		"	mov al, ah					\n\t"
 		"	cmp al, 9					\n\t"
 		"	ja letter					\n\t"
+		"	push rcx 					\n\t"
+		"	mov cl, al 					\n\t"
+		"	add %0, ecx 				\n\t"
+		"	pop rcx 					\n\t"
 		"	add al, 48					\n\t"
 		"	jmp print					\n\t"
 		"letter:						\n\t"
