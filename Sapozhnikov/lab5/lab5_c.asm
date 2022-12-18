@@ -7,6 +7,7 @@ AStack    ENDS
 DATA      SEGMENT
           KEEP_CS DW 0  ; для хранения сегмента
           KEEP_IP DW 0  ; и смещения прерывания
+          LEN DW 0
 DATA      ENDS
 
 ; Код программы
@@ -25,18 +26,6 @@ BEEP  PROC FAR
 	IN AL,61H        ; Состояние динамика
 	OR AL,00000011b  ; Включение
 	OUT 61H, AL      ; динамика
-
-	mov ah, 0
-	int 16h ; считывание 1-9
-	sub al, 31
-	cmp al, 8
-	jl seted
-	mov al, 9
-seted:
-	push cx
-	mov cl, 100
-	mul cx
-	pop cx
 
 	OUT 42H,AL
 	MOV AL,AH
@@ -69,6 +58,7 @@ Main	PROC  FAR
 	mov AX,DATA
 	mov DS,AX
 
+	mov ax, len
 	MOV AH, 35H
 	MOV AL, 23H
 	INT 21H
@@ -88,6 +78,18 @@ Main	PROC  FAR
 	int 16h
 	cmp al, 3
 	jne skipnotcntrlc
+
+	mov ah, 0
+	int 16h ; считывание 1-9
+	sub al, 31
+	cmp al, 8
+	jl seted
+	mov al, 9
+seted:
+	mov cl, 100
+	mul cx
+	mov LEN, ax
+
 	int 23h
 
 	CLI
@@ -105,4 +107,3 @@ Main	PROC  FAR
 Main	ENDP
 CODE	ENDS
 	END Main
-
