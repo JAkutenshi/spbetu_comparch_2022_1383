@@ -18,7 +18,7 @@ git remote add jonx8            https://github.com/jonx8/spbetu_comparch_2022_13
 #git remote add ubbl-cmd         https://github.com/ubbl-cmd/spbetu_comparch_2022_1383.git         # Сапожников Алексей   
 #git remote add Kafkazon         https://github.com/Kafkazon/spbetu_comparch_2022_1383.git         # Сардинов Михаил      
 #git remote add EllaSedova       https://github.com/EllaSedova/spbetu_comparch_2022_1383.git       # Седова Элла          
-#git remote add moterlode-cmd    https://github.com/moterlode-cmd/spbetu_comparch_2022_1383.git    # Федорова Оксана      
+git remote add moterlode-cmd     https://github.com/motherlode-cmd/spbetu_comparch_2022_1383.git   # Федорова Оксана      
 #git remote add necitboss        https://github.com/necitboss/spbetu_comparch_2022_1383.git        # Харитонов Никита     
 #git remote add Ars145           https://github.com/Ars145/spbetu_comparch_2022_1383.git           # Цыганков Арсений     
 #git remote add sashachernyakova https://github.com/sashachernyakova/spbetu_comparch_2022_1383.git # Чернякова Александра 
