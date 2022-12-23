@@ -5,7 +5,6 @@ counter PROC C USES EDI ESI, arr:dword, siz:dword, LGrInt:dword, NInt:dword, ans
 	push eax
 	push ebx
 	push ecx
-	push edx
 	push edi
 	push esi
 
@@ -22,7 +21,7 @@ counter PROC C USES EDI ESI, arr:dword, siz:dword, LGrInt:dword, NInt:dword, ans
 
 		push eax
 		mov eax, [esi + 4 * eax]
-		mov edx,eax
+
 		cmp eax, [edi + 4 * ebx]
 		pop eax
 		jl O
@@ -36,13 +35,14 @@ counter PROC C USES EDI ESI, arr:dword, siz:dword, LGrInt:dword, NInt:dword, ans
 		je NUMBER
 
 		mov edi, ans
-
 		push eax
-		mov eax, [edi + 4 * ebx]
-		add eax,edx
-		mov [edi + 4 * ebx], eax
-		pop eax
 
+		mov eax, [edi + 4 * ebx]
+		add eax,1
+
+		mov [edi + 4 * ebx], eax
+
+		pop eax
 		mov edi, LGrInt
 
 	NUMBER:
@@ -52,7 +52,6 @@ counter PROC C USES EDI ESI, arr:dword, siz:dword, LGrInt:dword, NInt:dword, ans
 
 	pop esi
 	pop edi
-	pop edx
 	pop ecx
 	pop ebx
 	pop eax
