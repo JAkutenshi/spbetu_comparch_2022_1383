@@ -2,7 +2,7 @@
 .code
 
 public C func2
-func2 PROC C arr1:dword, arr2:dword, res:dword, arr1_len:dword, index:dword, Xmin:dword, prov:dword
+func2 PROC C arr1:dword, arr2:dword, res:dword, arr1_len:dword, index:dword, Xmin:dword, prov_mas:dword
 
 push eax
 push ebx
@@ -33,7 +33,7 @@ loop1:
 		cmp ebx, 0
 		je iter
 		push esi
-		mov esi, prov
+		mov esi, prov_mas
 		mov eax, 1
 		mov [esi+edx*4], eax
 		pop esi

@@ -6,7 +6,7 @@
 using namespace std;
 
 extern "C" void(func1(int* arr, int NumRanDat, int* res, int Xmin));
-extern "C" void(func2(int *res, int*LGrInt, int*result, int interval, int NInt, int Xmin));
+extern "C" void(func2(int* res, int* LGrInt, int* result, int interval, int NInt, int Xmin, int* prov_mas));
 
 int cmp(const void* num1, const void* num2) {
     int* first = (int*)num1;
@@ -87,11 +87,11 @@ int main() {
     out.open("res.txt");
     for (int i = 0; i < NInt; i++) {
         if (prov_mas[i] == 0) {
-            cout << LGInt[i] << ": no value" << '\n';
-            out << LGInt[i] << ": no value" << '\n';
+            cout << LGrInt[i] << ": no value" << '\n';
+            out << LGrInt[i] << ": no value" << '\n';
         }
         else {
-            cout << LGInt[i] << ": " << result[i] << "\n";
+            cout << LGrInt[i] << ": " << result[i] << "\n";
             out << LGrInt[i] << " - " << result[i] << "\n";
         }
     }
