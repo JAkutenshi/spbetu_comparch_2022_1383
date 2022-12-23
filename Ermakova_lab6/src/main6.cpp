@@ -5,88 +5,82 @@
 
 using namespace std;
 
-extern "C" void func(int* intervals, int N_int, int N, int* numbers, int* final_answer);
+extern "C" void func(int* array, int arr_size, int* raspr_arr, int Xmin, int* arr2, int* res, int raspr_len, int index);
 
 int main() {
+    system("chcp 1251 > nul");
+    setlocale(LC_CTYPE, "rus");
 
     int N, X_min, X_max, N_int;
-
-    cout << "Input count of numbers:\n";
+    cout << "Введите количество чисел:" << endl;
     cin >> N;
-    cout << "Input min value of numbers:\n";
-    cin >> X_min;
-    cout << "Input max value of numbers:\n";
-    cin >> X_max;
-    cout << "Input count of intervals:\n";
+    cout << "Введите диапазон генерации:" << endl;
+    cin >> X_min >> X_max;
+    cout << "Введите количество интервалов:" << endl;
     cin >> N_int;
 
-    if (N <= 0) {
-        cout << "incorrect count of numbers\n";
-        return 0;
-    }
 
-    if (X_min >= X_max) {
-        cout << "incorrect X_min and X_max values\n";
-        return 0;
-    }
-
-    if (N_int <= 0 || N_int > 24) {
-        cout << "incorrect count of intervals\n";
-        return 0;
-    }
-
-    cout << "Input left borders:" << endl;
-
+    cout << "Введите левые границы:" << endl;
     auto intervals = new int[N_int + 1];
-
     for (int i = 0; i < N_int; ++i) {
         cin >> intervals[i];
-
-        if (intervals[i] < X_min || intervals[i] > X_max) {
-            cout << "border should be in the [X_min, X_max] interval\n";
-            delete[]intervals;
-            return 0;
-        }
     }
 
-    cout << "input right border:\n";
-    cin >> intervals[N_int];
-
-    for (int i = 0; i < N_int - 1; i++) {
-        for (int j = i + 1; j < N_int; j++) {
-            if (intervals[j] < intervals[i]) {
-                cout << "incorrect borders\n";
-                return 0;
+    for (int i = 0; i < N_int; i++) {
+        for (int j = i; j < N_int; j++) {
+            if (intervals[i] > intervals[j]) {
+                swap(intervals[i], intervals[j]);
             }
         }
     }
 
+
     auto numbers = new int[N];
-    random_device rd;
-    mt19937 generator(rd());
-    normal_distribution<> dist((X_max + X_min) / 2);
-    int i = 0;
-
-    while (i < N) {
-        double curr = dist(generator);
-        if (curr >= X_min && curr <= X_max) {
-            numbers[i] = int(curr);
-            i++;
-        }
-
+    for (int i = 0; i < N; i++)
+    {
+        numbers[i] = rand() % (X_max - X_min + 1) + X_min;
+        cout << numbers[i] << ' ';
     }
 
     cout << endl;
 
     auto final_answer = new int[N_int];
 
-    for (int i = 0; i < N_int; i++) {
+    /*for (int i = 0; i < N_int; i++) {
         final_answer[i] = 0;
-    }
-    func(intervals, N_int, N, numbers, final_answer);
+    }*/
+    int len_raspr = X_max - X_min + 1;
+    int* raspr_arr = new int[len_raspr];
+    int* arr3 = new int[N_int + 1];
 
+    for (int i = 0; i < len_raspr; i++)
+    {
+        raspr_arr[i] = 0;
+        arr3[i] = 0;
+    }
+
+    func(numbers, N, raspr_arr, X_min, intervals, arr3, len_raspr, N_int);
+
+    for (int i = 0; i < len_raspr; i++)
+    {
+        cout << raspr_arr[i] << ' ';
+    }
+    cout << "\n\n";
+
+    for (int i = 0; i < N_int; i++)
+    {
+        cout << intervals[i] << ": " << arr3[i] << "\n";
+    }
+
+    /*
     ofstream file("output.txt");
-    auto str = "N\tBorders\tNumbers` count";
+    for (int i = 0; i < N; i++) {
+        cout << numbers[i] << ' ';
+        file << numbers[i] << ' ';
+    }
+    file << endl;
+    cout << endl;
+    auto str = "N\tГраницы\tКоличество чисел";
     file << str << endl;
     cout << str << endl;
     for (int i = 0; i < N_int; i++) {
@@ -94,6 +88,7 @@ int main() {
         file << str_res;
         cout << str_res;
     }
+    */
     system("Pause");
     return 0;
 }
