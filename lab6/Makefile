@@ -1,13 +1,13 @@
 all: main
 
-main: main.o lab6.o
-	gcc main.o lab6.o -o main -z noexecstack
+main: task_.o task.o
+	gcc task_.o task.o -o main -z noexecstack
 
-main.o: main.c
-	gcc -c main.c
+task_.o: task_.c
+	gcc -c task_.c
 
-lab6.o: lab6.s
-	as lab6.s -msyntax=intel -mnaked-reg -mmnemonic=intel -o lab6.o
+task.o: task.s
+	as task.s -msyntax=intel -mnaked-reg -mmnemonic=intel -o task.o
 
 clean:
 	rm -f *.o main
