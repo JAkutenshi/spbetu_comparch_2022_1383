@@ -1,4 +1,4 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -22,7 +22,7 @@ int main()
 	
 	int* LGrInt = new int[NInt];
 	LGrInt[0] = Xmin;
-	for (int i = 1; i < NInt; ++i)
+	for (int i = 0; i < NInt; ++i)
 	{
 		cin >> LGrInt[i];
 	}
