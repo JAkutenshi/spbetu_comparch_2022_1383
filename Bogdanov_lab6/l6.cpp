@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -28,7 +28,7 @@ int main()
 	}
 	int* ans = new int[NInt] {0};
 	counter(arr, NumRanDat, LGrInt, NInt, ans);
-	freopen("out.txt", "w", stdout);
+	//freopen("out.txt", "w", stdout);
 	for (int i = 0; i < NInt; ++i)
 	{
 		cout << i + 1 << "	" << LGrInt[i] << "	" << ans[i] << endl;;
